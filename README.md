@@ -37,21 +37,21 @@ The datapath is structured around the four pipeline stages, with pipeline regist
 
 * The ALU supports the following 16 operations, selected by the `sel` input:
 
-| `sel`       | Operation       | Description                                  | Output `Z` Calculation (`A`, `B` are 8-bit, `Z` is 16-bit) |
-| :---------- | :-------------- | :------------------------------------------- | :--------------------------------------------------------- |
-| `4'h0`      | `ADD`           | Addition                                     | `A + B`                                                    |
-| `4'h1`      | `SUB`           | Subtraction                                  | `A - B`                                                    |
-| `4'h2`      | `MUL`           | Multiplication                               | `A * B`                                                    |
-| `4'h3`      | `DIV`           | Division (Integer)                           | `A / B`                                                    |
-| `4'h4`      | `SRA`           | Logical Right Shift of A by 1 bit            | `A >> 1`                                                   |
-| `4'h5`      | `SLA`           | Logical Left Shift of A by 1 bit             | `A << 1`                                                   |
-| `4'h6`      | `AND`           | Bitwise AND                                  | `A & B`                                                    |
-| `4'h7`      | `OR`            | Bitwise OR                                   | `A \| B`                                                   |
-| `4'h8`      | `XOR`           | Bitwise XOR                                  | `A ^ B`                                                    |
-| `4'h9`      | `INV`           | Bitwise Inversion of A                       | `~A`                                                       |
-| `4'hA`      | `XNOR`          | Bitwise XNOR                                 | `~(A ^ B)`                                                 |
-| `4'hB`      | `NAND`          | Bitwise NAND                                 | `~(A & B)`                                                 |
-| `4'hC`      | `RRA`           | Right Rotate of A by 1 bit                   | `{A[0], A[7:1]}`                                           |
-| `4'hD`      | `RLA`           | Left Rotate of A by 1 bit                    | `{A[6:0], A[7]}`                                           |
-| `4'hE`      | `GT`            | Greater Than (A > B)                         | `16'd1` if A > B, else `16'd0`                             |
-| `4'hF`      | `EQ`            | Equal To (A == B)                            | `16'd1` if A == B, else `16'd0`                            |
+| `sel`       | Operation       | Description                                  | Output                          |                           
+| :---------- | :-------------- | :------------------------------------------- | :-------------------------------|
+| `4'h0`      | `ADD`           | Addition                                     | `A + B`                         |                           
+| `4'h1`      | `SUB`           | Subtraction                                  | `A - B`                         |                           
+| `4'h2`      | `MUL`           | Multiplication                               | `A * B`                         |                           
+| `4'h3`      | `DIV`           | Division (Integer)                           | `A / B`                         |                           
+| `4'h4`      | `SRA`           | Logical Right Shift of A by 1 bit            | `A >> 1`                        |                          
+| `4'h5`      | `SLA`           | Logical Left Shift of A by 1 bit             | `A << 1`                        |                           
+| `4'h6`      | `AND`           | Bitwise AND                                  | `A & B`                         |                           
+| `4'h7`      | `OR`            | Bitwise OR                                   | `A \| B`                        |                           
+| `4'h8`      | `XOR`           | Bitwise XOR                                  | `A ^ B`                         |                           
+| `4'h9`      | `INV`           | Bitwise Inversion of A                       | `~A`                            |                           
+| `4'hA`      | `XNOR`          | Bitwise XNOR                                 | `~(A ^ B)`                      |                           
+| `4'hB`      | `NAND`          | Bitwise NAND                                 | `~(A & B)`                      |                          
+| `4'hC`      | `RRA`           | Right Rotate of A by 1 bit                   | `{A[0], A[7:1]}`                |                           
+| `4'hD`      | `RLA`           | Left Rotate of A by 1 bit                    | `{A[6:0], A[7]}`                |
+| `4'hE`      | `GT`            | Greater Than (A > B)                         | `16'd1` if A > B, else `16'd0`  |
+| `4'hF`      | `EQ`            | Equal To (A == B)                            | `16'd1` if A == B, else `16'd0` |
