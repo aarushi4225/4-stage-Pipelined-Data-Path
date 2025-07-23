@@ -55,3 +55,13 @@ The datapath is structured around the four pipeline stages, with pipeline regist
 | `4'hD`      | `RLA`           | Left Rotate of A by 1 bit                    | `{A[6:0], A[7]}`                |
 | `4'hE`      | `GT`            | Greater Than (A > B)                         | `16'd1` if A > B, else `16'd0`  |
 | `4'hF`      | `EQ`            | Equal To (A == B)                            | `16'd1` if A == B, else `16'd0` |
+
+## Scope for Improvement
+This datapath is only a part of the core processor model, a significant area for improvement would be the integration of an **ID (Instruction Decode) pipeline stage.**
+
+Instruction Decode (ID) Stage: This stage would be responsible for:
+* Decoding fetched instructions to understand the operation to be performed.
+* Reading required operands from the Register File based on the decoded instruction.
+* Generating control signals for subsequent EX, MEM, and WB stages based on the instruction type.
+
+Incorporating an ID stage would complete the instruction processing pipeline, transitioning this datapath into a more functional and representative CPU core.
