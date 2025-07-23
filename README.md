@@ -24,9 +24,34 @@ The datapath is structured around the four pipeline stages, with pipeline regist
 
 ## Module Breakdown
 
-* `**datapath.v**`: The top-level module integrating all components and implementing the 4-stage pipeline registers. It manages the flow of data and control signals through the pipeline.
-* `**alu.v**`: Implements the Arithmetic Logic Unit, performing operations like addition, subtraction, AND, OR, XOR, and NOT on 16-bit operands based on a 4-bit select signal.
-* `**register_file.v**`: Models a 32x16-bit register file, allowing simultaneous reads from two registers and synchronous writes to one.
-* `**memory.v**`: Represents a simple 256x16-bit data memory, supporting synchronous write and combinational read operations.
-* `**clk2phase.v**`: Generates two non-overlapping clock phases (`phi1`, `phi2`) from a single input clock, essential for controlling pipeline stage transitions.
-* `**datapath_tb.v**`: The testbench module responsible for generating the main clock, reset signal, and providing stimulus (instruction parameters) to the `datapath` for behavioral simulation and verification.
+* `datapath.v`: The top-level module integrating all components and implementing the 4-stage pipeline registers. It manages the flow of data and control signals through the pipeline.
+* `alu.v`: Implements the Arithmetic Logic Unit, performing operations like addition, subtraction, AND, OR, XOR, and NOT on 16-bit operands based on a 4-bit select signal.
+* `register_file.v`: Models a 32x16-bit register file, allowing simultaneous reads from two registers and synchronous writes to one.
+* `memory.v`: Represents a simple 256x16-bit data memory, supporting synchronous write and combinational read operations.
+* `clk2phase.v`: Generates two non-overlapping clock phases (`phi1`, `phi2`) from a single input clock, essential for controlling pipeline stage transitions.
+* `datapath_tb.v`: The testbench module responsible for generating the main clock, reset signal, and providing stimulus (instruction parameters) to the `datapath` for behavioral simulation and verification.
+
+## Supported Features
+
+* The basic **Read** and **Write** operation for Data storage and Retrieval.
+
+* The ALU supports the following 16 operations, selected by the `sel` input:
+
+| `sel`       | Operation       | Description                                  | Output `Z` Calculation (`A`, `B` are 8-bit, `Z` is 16-bit) |
+| :---------- | :-------------- | :------------------------------------------- | :--------------------------------------------------------- |
+| `4'h0`      | `ADD`           | Addition                                     | `A + B`                                                    |
+| `4'h1`      | `SUB`           | Subtraction                                  | `A - B`                                                    |
+| `4'h2`      | `MUL`           | Multiplication                               | `A * B`                                                    |
+| `4'h3`      | `DIV`           | Division (Integer)                           | `A / B`                                                    |
+| `4'h4`      | `SRA`           | Logical Right Shift of A by 1 bit            | `A >> 1`                                                   |
+| `4'h5`      | `SLA`           | Logical Left Shift of A by 1 bit             | `A << 1`                                                   |
+| `4'h6`      | `AND`           | Bitwise AND                                  | `A & B`                                                    |
+| `4'h7`      | `OR`            | Bitwise OR                                   | `A \| B`                                                   |
+| `4'h8`      | `XOR`           | Bitwise XOR                                  | `A ^ B`                                                    |
+| `4'h9`      | `INV`           | Bitwise Inversion of A                       | `~A`                                                       |
+| `4'hA`      | `XNOR`          | Bitwise XNOR                                 | `~(A ^ B)`                                                 |
+| `4'hB`      | `NAND`          | Bitwise NAND                                 | `~(A & B)`                                                 |
+| `4'hC`      | `RRA`           | Right Rotate of A by 1 bit                   | `{A[0], A[7:1]}`                                           |
+| `4'hD`      | `RLA`           | Left Rotate of A by 1 bit                    | `{A[6:0], A[7]}`                                           |
+| `4'hE`      | `GT`            | Greater Than (A > B)                         | `16'd1` if A > B, else `16'd0`                             |
+| `4'hF`      | `EQ`            | Equal To (A == B)                            | `16'd1` if A == B, else `16'd0`                            |
